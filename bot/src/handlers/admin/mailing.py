@@ -2,9 +2,9 @@ import asyncio
 from typing import Iterable
 
 from aiogram import Dispatcher, Bot
-from aiogram import FSMContext
-from aiogram import RetryAfter
+from aiogram.dispatcher import FSMContext
 from aiogram.types import KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
+from aiogram.utils.exceptions import RetryAfter
 
 from src.misc.admin_states import MailingPostCreating
 from src.database.users import get_user_ids
@@ -120,8 +120,9 @@ class Mailer:
 class Handlers:
     @staticmethod
     async def __handle_admin_mailing_button(message: Message, state: FSMContext):
-        await message.answer(Messages.ask_for_post_content(),
-                             reply_markup=Keyboards.cancel_markup)
+        await message.answer(
+            text=Messages.ask_for_post_content(), reply_markup=Keyboards.cancel_markup
+        )
         await state.set_state(MailingPostCreating.wait_for_content_message)
 
     @staticmethod

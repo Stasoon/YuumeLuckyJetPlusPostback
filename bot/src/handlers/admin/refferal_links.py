@@ -1,11 +1,11 @@
 from aiogram import Dispatcher
-from aiogram import FSMContext
-from aiogram import CallbackData
+from aiogram.dispatcher import FSMContext
 from aiogram.types import KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
+from aiogram.utils.callback_data import CallbackData
 
-from bot.src.misc.admin_states import ReferralLinkStates
-from bot.src.database.reflink import create_reflink, is_reflink_exists, get_link_names, get_link, delete_reflink
-from bot.config import Config
+from src.misc.admin_states import ReferralLinkStates
+from src.database.reflink import create_reflink, is_reflink_exists, get_link_names, get_link, delete_reflink
+from config import Config
 
 
 reflinks_callback_data = CallbackData('referral_links', 'action')

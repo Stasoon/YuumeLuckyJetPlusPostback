@@ -1,4 +1,4 @@
-from aiogram import CallbackData
+from aiogram.utils.callback_data import CallbackData
 
 movies_callback = CallbackData('hentai', 'action', 'code')
 

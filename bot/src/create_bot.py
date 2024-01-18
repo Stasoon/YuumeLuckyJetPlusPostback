@@ -1,8 +1,8 @@
 from aiogram import Dispatcher, Bot
-from aiogram.contrib.fsm_storage import MemoryStorage
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
-from bot.src.middlewares.localization import setup_middleware
-from bot.config import Config
+from src.middlewares.localization import setup_middleware
+from config import Config
 
 
 bot = Bot(token=Config.TOKEN, parse_mode='html')

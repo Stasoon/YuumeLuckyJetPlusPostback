@@ -1,8 +1,8 @@
 from functools import wraps
 
+from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import CallbackQuery
-from aiogram import Throttled
-from aiogram import CancelHandler
+from aiogram.utils.exceptions import Throttled
 
 from src.create_bot import dp
 

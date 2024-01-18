@@ -1,5 +1,5 @@
 from aiogram import Dispatcher, types
-from aiogram import ReplyKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup
 
 from . import statistic
 from . import mailing

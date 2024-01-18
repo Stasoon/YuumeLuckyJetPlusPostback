@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
-from aiogram import FSMContext
+from aiogram.dispatcher import FSMContext
 from aiogram.types import KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
-from aiogram import CallbackData
+from aiogram.utils.callback_data import CallbackData
 
 from src.misc.admin_states import AdminAdding
 from src.database.admin import add_admin, delete_admin, is_admin_exist, get_admins
@@ -32,9 +32,10 @@ class Handlers:
     @staticmethod
     async def __handle_add_admin_callback(callback: CallbackQuery, state: FSMContext):
         await callback.message.delete()
-        await callback.message.answer('🔘 Получите id человека в боте @getmyid_bot. \n'
-                                      'Затем пришлите его сюда',
-                                      reply_markup=Keyboards.cancel_markup)
+        await callback.message.answer(
+            text='🔘 Получите id человека в боте @getmyid_bot. \nЗатем пришлите его сюда',
+            reply_markup=Keyboards.cancel_markup
+        )
         await state.set_state(AdminAdding.wait_for_new_admin_id)
 
     @staticmethod

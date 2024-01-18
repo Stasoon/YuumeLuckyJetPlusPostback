@@ -1,4 +1,4 @@
-from aiogram.dispatcher.filters import State, StatesGroup
+from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
 class UserDataInputting(StatesGroup):

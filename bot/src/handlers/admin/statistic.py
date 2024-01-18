@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
-from aiogram import FSMContext
+from aiogram.dispatcher import FSMContext
 from aiogram.types import KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
-from aiogram import CallbackData
+from aiogram.utils.callback_data import CallbackData
 
 from src.misc.admin_states import StatsGetting
 from src.database.users import get_users_total_count, get_users_by_hours
@@ -89,14 +89,16 @@ class Handlers:
 
     @classmethod
     def register_admin_statistic_handlers(cls, dp: Dispatcher):
-        dp.register_message_handler(cls.__handle_admin_statistic_button, is_admin=True,
-                                    text=Keyboards.reply_button_for_admin_menu.text)
+        dp.register_message_handler(
+            cls.__handle_admin_statistic_button, is_admin=True,
+            text=Keyboards.reply_button_for_admin_menu.text
+        )
 
         # dp.register_callback_query_handler(cls.__handle_back_callback, statistic_callback_data.filter(value='back'),
         #                                    state='*')
         dp.register_callback_query_handler(cls.__handle_show_stats_callback, statistic_callback_data.filter(), state='*')
-        dp.register_message_handler(cls.__handle_get_hours_message,
-                                           is_admin=True,
-                                           state=StatsGetting.wait_for_hours_count)
+        dp.register_message_handler(
+            cls.__handle_get_hours_message, is_admin=True, state=StatsGetting.wait_for_hours_count
+        )
 
 

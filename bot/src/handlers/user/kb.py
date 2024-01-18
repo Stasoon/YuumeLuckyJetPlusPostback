@@ -1,5 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram import CallbackData
+from aiogram.utils.callback_data import CallbackData
+
+from src.create_bot import _
 
 
 class Keyboards:
@@ -17,36 +19,25 @@ class Keyboards:
     @staticmethod
     def get_welcome_menu() -> InlineKeyboardMarkup:
         channel_url = 'https://t.me/+WZCtVDD5A_5jOGY6'
-        subscribe_button = InlineKeyboardButton(text='🔊 ПОДПИСАТЬСЯ НА КАНАЛ 🔊', url=channel_url)
-        free_access_button = InlineKeyboardButton(text='🔒 БЕСПЛАТНЫЙ ДОСТУП 🔒', callback_data='free_access')
+        subscribe_button = InlineKeyboardButton(text=_('🔊 ПОДПИСАТЬСЯ НА КАНАЛ 🔊'), url=channel_url)
+        free_access_button = InlineKeyboardButton(text=_('🔒 БЕСПЛАТНЫЙ ДОСТУП 🔒'), callback_data='free_access')
 
         return InlineKeyboardMarkup(row_width=1).add(subscribe_button, free_access_button)
 
     @staticmethod
     def get_receive_signals() -> InlineKeyboardMarkup:
-        receive_button = InlineKeyboardButton(text='🤖 ПРОУЧИТЬ СИГНАЛЫ 🤖', callback_data='receive_signals')
+        receive_button = InlineKeyboardButton(text=_('🤖 ПОЛУЧИТЬ СИГНАЛЫ 🤖'), callback_data='receive_signals')
         return InlineKeyboardMarkup(row_width=1).add(receive_button)
 
     @staticmethod
-    def get_registration() -> InlineKeyboardMarkup:
-        registration_link = 'https://1wauah.xyz'
-        registration_link_button = InlineKeyboardButton(text='📲 РЕГИСТРАЦИЯ', url=registration_link)
-        check_registration = InlineKeyboardButton(text='🔎 ПРОВЕРИТЬ РЕГИСТРАЦИЮ', callback_data='check_registration')
+    def get_registration(user_telegram_id: int) -> InlineKeyboardMarkup:
+        registration_link = f'https://1wauah.xyz/casino/list?open=register#ly4f&sub1={user_telegram_id}'
+        registration_link_button = InlineKeyboardButton(text=_('📲 РЕГИСТРАЦИЯ'), url=registration_link)
 
+        check_registration = InlineKeyboardButton(text=_('🔎 ПРОВЕРИТЬ РЕГИСТРАЦИЮ'), callback_data='check_registration')
         return InlineKeyboardMarkup(row_width=1).add(registration_link_button, check_registration)
 
     @staticmethod
     def get_check_deposit() -> InlineKeyboardMarkup:
-        check_deposit = InlineKeyboardButton(text='✅ ПРОВЕРИТЬ ДЕПОЗИТ', callback_data='check_deposit')
+        check_deposit = InlineKeyboardButton(text=_('✅ ПРОВЕРИТЬ ДЕПОЗИТ'), callback_data='check_deposit')
         return InlineKeyboardMarkup(row_width=1).add(check_deposit)
-
-    # @staticmethod
-    # def get_first_signal_markup() -> InlineKeyboardMarkup:
-    #     first_signal = InlineKeyboardButton(_('▶ ПОЛУЧИТЬ СИГНАЛ ▶'), callback_data='next_signal')
-    #     return InlineKeyboardMarkup(row_width=2).add(first_signal)
-    #
-    # @staticmethod
-    # def get_next_signal_markup() -> InlineKeyboardMarkup:
-    #     next_signal = InlineKeyboardButton(_('СЛЕДУЮЩИЙ РАУНД ➡'), callback_data='next_signal')
-    #     return InlineKeyboardMarkup(row_width=2).add(next_signal)
-

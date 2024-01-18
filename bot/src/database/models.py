@@ -1,5 +1,5 @@
 from datetime import datetime
-from peewee import Model, SqliteDatabase, TextField, IntegerField, DateTimeField, CharField, ForeignKeyField, FloatField
+from peewee import Model, SqliteDatabase, IntegerField, DateTimeField, CharField, FloatField
 
 db = SqliteDatabase('../database.db')
 
@@ -47,7 +47,7 @@ class Channel(_BaseModel):
     url = CharField()
 
 
-class OneWinRegistration(Model):
+class OneWinRegistration(_BaseModel):
     class Meta:
         db_table = 'one_win_registrations'
 
@@ -55,11 +55,11 @@ class OneWinRegistration(Model):
     one_win_id = IntegerField()
 
 
-class OneWinDeposit(Model):
+class OneWinDeposit(_BaseModel):
     class Meta:
         db_table = 'one_win_deposits'
 
-    sub_id = IntegerField()
+    sub_id = IntegerField(primary_key=True)
     one_win_id = IntegerField()
     amount = FloatField()
 

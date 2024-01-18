@@ -11,4 +11,4 @@ class Config:
     ADMIN_IDS: Final = tuple(int(i) for i in str(os.getenv('BOT_ADMIN_IDS')).split(','))
 
     LOCALES_DIR = 'locales'
-    I18N_DOMAIN = 'bot'
+    I18N_DOMAIN = 'messages'

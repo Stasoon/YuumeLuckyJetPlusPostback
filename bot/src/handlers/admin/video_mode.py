@@ -1,5 +1,5 @@
 from aiogram import Dispatcher
-from aiogram import FSMContext
+from aiogram.dispatcher import FSMContext
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, Message
 
 from src.misc.admin_states import VideoMode

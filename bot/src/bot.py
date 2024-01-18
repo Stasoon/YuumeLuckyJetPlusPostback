@@ -4,14 +4,10 @@ from src.filters import register_all_filters
 from src.handlers import register_all_handlers
 from src.database import register_models
 from src.create_bot import dp, bot
-from logs.config import Config
 from src.utils import logger
 
 
 async def on_startup(_):
-    bot_username = (await bot.get_me()).username
-    Config.set_bot_username(bot_username)
-
     # Регистрация фильтров
     register_all_filters(dp)
 

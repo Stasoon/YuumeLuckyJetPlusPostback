@@ -1,14 +1,13 @@
-from aiogram import I18nMiddleware
 from aiogram import types
+from aiogram.contrib.middlewares.i18n import I18nMiddleware
 
-from bot.config import Config
-from bot.src.database.users import get_user_locale_or_none
+from config import Config
+from src.database.users import get_user_locale_or_none
 
 
 class ACLMiddleware(I18nMiddleware):
     default_language_code = 'ru'
 
-    # Каждый раз, когда нужно узнать язык пользователя - выполняется эта функция
     async def get_user_locale(self, action, args):
         user = types.User.get_current()
 
@@ -16,13 +15,10 @@ class ACLMiddleware(I18nMiddleware):
         if user:
             lang_code = get_user_locale_or_none(user.id)
 
-        # Возвращаем язык из базы, если он есть
         if lang_code:
             return lang_code
-        # Иначе язык из телеграма
         elif user and user.locale:
             return lang_code
-        # Иначе дефолтный
         else:
             return self.default_language_code
 
@@ -33,7 +29,9 @@ class ACLMiddleware(I18nMiddleware):
 
 
 def setup_middleware(dp):
-    # Устанавливаем миддлварь
+    # Инициализируем механизм локализации
     i18n = ACLMiddleware(Config.I18N_DOMAIN, Config.LOCALES_DIR, default='ru')
+
+    # Устанавливаем миддлварь
     dp.middleware.setup(i18n)
     return i18n
