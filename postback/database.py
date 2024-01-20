@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 from config import DB_PATH
 
@@ -29,15 +30,19 @@ def create_tables_if_not_exist():
         conn.commit()
 
 
-def save_registration(sub_id: int, one_win_id: int):
-    with sqlite3.connect('имя_базы_данных.db') as conn:
+def save_registration(one_win_id: int):
+    current_datetime = datetime.now()
+
+    with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO one_win_registrations VALUES (?, ?);', (sub_id, one_win_id))
+        cursor.execute('INSERT INTO one_win_registrations VALUES (?, ?);', (one_win_id, current_datetime))
         conn.commit()
 
 
-def save_deposit(sub_id: int, one_win_id, amount: float):
-    with sqlite3.connect('имя_базы_данных.db') as conn:
+def save_deposit(one_win_id, amount: float):
+    current_datetime = datetime.now()
+
+    with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO one_win_deposits VALUES (?, ?, ?);', (sub_id, one_win_id, amount))
+        cursor.execute('INSERT INTO one_win_deposits VALUES (?, ?, ?);', (one_win_id, amount, current_datetime))
         conn.commit()

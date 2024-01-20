@@ -2,8 +2,8 @@ from flask import Flask, request
 
 from database import create_tables_if_not_exist, save_registration, save_deposit
 from telegram import send_message
-from config import TG_ADMIN_IDS
-from logging import logger
+from config import TG_ADMIN_IDS, PORT
+from logger import logger
 
 
 app = Flask(__name__)
@@ -14,28 +14,44 @@ def index():
     return "I'm alive!"
 
 
-@app.route("/registration", methods=['GET'])
+@app.route("/reg", methods=['GET'])
 def registration():
     one_win_id = request.args.get('user_id')
-    sub_id = request.args.get('sub')
 
-    save_registration(sub_id=sub_id, one_win_id=one_win_id)
+    save_registration(one_win_id=one_win_id)
 
+    text = f"Регистрация: {one_win_id}"
+    logger.info(text)
     for admin_id in TG_ADMIN_IDS:
-        send_message(chat_id=admin_id, text=str(one_win_id))
+        send_message(chat_id=admin_id, text=text)
 
     return 'OK: 200'
 
 
-@app.route('/deposit')
-def first_deposit():
+@app.route('/dep')
+def deposit():
     one_win_id = request.args.get('user_id')
-    sub_id = request.args.get('sub')
     amount = request.args.get('amount')
 
-    save_deposit(one_win_id=one_win_id, sub_id=sub_id, amount=amount)
+    save_deposit(one_win_id=one_win_id, amount=amount)
 
-    text = f'{one_win_id}:депозит:{amount}'
+    text = f'{one_win_id} : депозит : {amount}'
+    logger.info(text)
+    for admin_id in TG_ADMIN_IDS:
+        send_message(chat_id=admin_id, text=text)
+
+    return 'OK: 200'
+
+
+@app.route('/firstdep')
+def first_deposit():
+    one_win_id = request.args.get('user_id')
+    amount = request.args.get('amount')
+
+    save_deposit(one_win_id=one_win_id, amount=amount)
+
+    text = f'{one_win_id} : первый депозит : {amount}'
+    logger.info(text)
     for admin_id in TG_ADMIN_IDS:
         send_message(chat_id=admin_id, text=text)
 
@@ -44,7 +60,7 @@ def first_deposit():
 
 def run_app():
     logger.info('Приложение запущено')
-    port = 5000
+    port = PORT
     app.run(host="0.0.0.0", port=port)
 
 

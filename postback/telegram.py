@@ -1,6 +1,6 @@
 import requests
 from urllib.parse import urlencode
-from loguru import logger
+from logger import logger
 
 from config import BOT_TOKEN
 
