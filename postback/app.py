@@ -18,7 +18,10 @@ def index():
 def registration():
     one_win_id = request.args.get('user_id')
 
-    save_registration(one_win_id=one_win_id)
+    try:
+        save_registration(one_win_id=one_win_id)
+    except Exception as e:
+        logger.error(e)
 
     text = f"Регистрация: {one_win_id}"
     logger.info(text)
@@ -33,7 +36,10 @@ def deposit():
     one_win_id = request.args.get('user_id')
     amount = request.args.get('amount')
 
-    save_deposit(one_win_id=one_win_id, amount=amount)
+    try:
+        save_deposit(one_win_id=one_win_id, amount=amount)
+    except Exception as e:
+        logger.error(e)
 
     text = f'{one_win_id} : депозит : {amount}'
     logger.info(text)
@@ -48,7 +54,10 @@ def first_deposit():
     one_win_id = request.args.get('user_id')
     amount = request.args.get('amount')
 
-    save_deposit(one_win_id=one_win_id, amount=amount)
+    try:
+        save_deposit(one_win_id=one_win_id, amount=amount)
+    except Exception as e:
+        logger.error(e)
 
     text = f'{one_win_id} : первый депозит : {amount}'
     logger.info(text)

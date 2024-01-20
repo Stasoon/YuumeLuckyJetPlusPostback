@@ -101,9 +101,11 @@ async def __handle_check_deposit_callback(callback: CallbackQuery, callback_data
     if not user_deposits_sum:
         user_deposits_sum = 0.0
 
+    min_rub_deposit_amount = 500.0
+
     if user_deposits_sum == 0:
         await callback.answer(text=Messages.get_deposit_not_found(), show_alert=True)
-    elif user_deposits_sum < 10.0:
+    elif user_deposits_sum < min_rub_deposit_amount:
         await callback.answer(text=Messages.get_deposit_too_low(), show_alert=True)
     else:
         await callback.message.delete()

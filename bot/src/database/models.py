@@ -58,7 +58,8 @@ class OneWinRegistration(_BaseModel):
 class OneWinDeposit(_BaseModel):
     class Meta:
         db_table = 'one_win_deposits'
-
+    
+    id = IntegerField(primary_key=True)
     one_win_id = IntegerField()
     amount = FloatField()
     timestamp = DateTimeField(default=datetime.now)

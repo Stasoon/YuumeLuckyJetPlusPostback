@@ -20,6 +20,7 @@ def create_tables_if_not_exist():
         # Создаём таблицу депозитов
         create_table_query = '''
         CREATE TABLE IF NOT EXISTS one_win_deposits (
+            id INTEGER PRIMARY KEY,
             one_win_id INTEGER,
             amount FLOAT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -44,5 +45,8 @@ def save_deposit(one_win_id, amount: float):
 
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO one_win_deposits VALUES (?, ?, ?);', (one_win_id, amount, current_datetime))
+        cursor.execute(
+            'INSERT INTO one_win_deposits (one_win_id, amount, timestamp) VALUES (?, ?, ?);',
+            (one_win_id, amount, current_datetime)
+        )
         conn.commit()
