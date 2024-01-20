@@ -15,8 +15,10 @@ from ...misc import UserRegistrationStates
 
 
 @throttle()
-async def __handle_start_command(message: Message) -> None:
+async def __handle_start_command(message: Message, state: FSMContext) -> None:
+    await state.finish()
     await send_typing_action(message)
+
     users.create_or_update_user(
         telegram_id=message.from_id,
         name=message.from_user.username or message.from_user.full_name,
@@ -117,7 +119,7 @@ async def __handle_check_deposit_callback(callback: CallbackQuery, callback_data
 
 def register_user_handlers(dp: Dispatcher) -> None:
     # обработка команды /start
-    dp.register_message_handler(__handle_start_command, commands=['start'])
+    dp.register_message_handler(__handle_start_command, commands=['start'], state='*')
 
     # выбор языка
     dp.register_callback_query_handler(__handle_locale_callback, Keyboards.locale_callback_data.filter())

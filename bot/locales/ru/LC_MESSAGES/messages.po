@@ -155,7 +155,7 @@ msgid ""
 msgstr ""
 
 #~ msgid "registration_not_passed"
-#~ msgstr ""
+#~ msgstr "https://telegra.ph/file/e1ba046b4391bcc94d62a.png"
 
 #~ msgid "🤖 ПРОУЧИТЬ СИГНАЛЫ 🤖"
 #~ msgstr ""

@@ -56,7 +56,7 @@ class Messages:
 
     @staticmethod
     def get_registration_tutorial_photo() -> str:
-        return 'https://telegra.ph/file/b28d7cd35a6a5578fa8f6.png'
+        return 'https://telegra.ph/file/f03af5af4737ea56e3619.png'
 
     @staticmethod
     def get_ask_for_one_win_id() -> str:
