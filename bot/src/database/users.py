@@ -44,6 +44,14 @@ def get_user_1win_id(telegram_id: int) -> int | None:
         return None
     return user.onewin_id
 
+
+def get_user_by_1win_id(one_win_id: int) -> User | None:
+    user = User.get_or_none(User.onewin_id == one_win_id)
+    if not user:
+        return None
+    return user
+
+
 # endregion
 
 

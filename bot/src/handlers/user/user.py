@@ -1,4 +1,5 @@
 from aiogram import Dispatcher
+from aiogram.dispatcher import FSMContext
 
 from aiogram.types import CallbackQuery, Message, InputMediaVideo, InputMediaPhoto
 from peewee import fn
@@ -10,6 +11,7 @@ from .kb import Keyboards
 from src.create_bot import i18n
 
 from src.database.models import OneWinRegistration, OneWinDeposit
+from ...misc import UserRegistrationStates
 
 
 @throttle()
@@ -52,38 +54,57 @@ async def __handle_receive_signals_callback(callback: CallbackQuery):
     await callback.message.answer_photo(
         photo=Messages.get_registration_tutorial_photo(),
         caption=Messages.get_registration_tutorial(),
-        reply_markup=Keyboards.get_registration(user_telegram_id=callback.from_user.id),
+        reply_markup=Keyboards.get_create_account(),
     )
 
 
-async def __handle_check_registration_callback(callback: CallbackQuery):
-    user_one_win_registration = OneWinRegistration.get_or_none(OneWinRegistration.sub_id == callback.from_user.id)
+async def __handle_check_registration_callback(callback: CallbackQuery, state: FSMContext):
+    await callback.message.edit_reply_markup(reply_markup=None)
+    await callback.message.answer_photo(
+        photo=Messages.get_ask_for_one_win_id_photo(),
+        caption=Messages.get_ask_for_one_win_id(),
+        reply_markup=None
+    )
+    await state.set_state(UserRegistrationStates.enter_one_win_id.state)
 
-    if user_one_win_registration:
-        text = Messages.get_registration_passed()
-        photo = Messages.get_registration_passed_photo()
-        markup = Keyboards.get_check_deposit()
 
-        await callback.message.edit_media(media=InputMediaPhoto(media=photo, caption=text), reply_markup=markup)
-    else:
-        await callback.message.edit_reply_markup(reply_markup=None)
+async def __handle_one_win_id_message(message: Message, state: FSMContext):
+    if not message.text.isdigit():
+        await message.answer(text=Messages.get_id_should_be_digit_error_retry())
+        return
+
+    await state.finish()
+    one_win_id = int(message.text)
+    one_win_registration = OneWinRegistration.get_or_none(OneWinRegistration.one_win_id == one_win_id)
+
+    if not one_win_registration:
         text = Messages.get_registration_not_passed()
         photo = Messages.get_registration_not_passed_photo()
-        markup = Keyboards.get_registration(user_telegram_id=callback.from_user.id)
+        markup = Keyboards.get_registration()
+    else:
+        text = Messages.get_registration_passed()
+        photo = Messages.get_registration_passed_photo()
+        markup = Keyboards.get_check_deposit(one_win_id=one_win_id)
+        users.set_user_1win_id(telegram_id=message.from_user.id, onewin_id=one_win_id)
 
-        await callback.message.answer_photo(photo=photo, caption=text, reply_markup=markup)
+    await message.answer_photo(photo=photo, caption=text, reply_markup=markup)
 
 
-async def __handle_check_deposit_callback(callback: CallbackQuery):
+async def __handle_check_deposit_callback(callback: CallbackQuery, callback_data: Keyboards.deposit_check_callback):
     user_deposits_sum = (
         OneWinDeposit
         .select(fn.SUM(OneWinDeposit.amount))
-        .where(OneWinDeposit.sub_id == callback.from_user.id)
+        .where(OneWinDeposit.one_win_id == callback_data.get('one_win_id'))
         .scalar()
     )
 
-    if user_deposits_sum and user_deposits_sum < 10.0:
+    if not user_deposits_sum:
+        user_deposits_sum = 0.0
+
+    if user_deposits_sum == 0:
         await callback.answer(text=Messages.get_deposit_not_found(), show_alert=True)
+    elif user_deposits_sum < 10.0:
+        await callback.answer(text=Messages.get_deposit_too_low(), show_alert=True)
     else:
         await callback.message.delete()
         await callback.message.answer(text=Messages.get_welcome_to_vip())
@@ -105,4 +126,5 @@ def register_user_handlers(dp: Dispatcher) -> None:
 
     # регистрация
     dp.register_callback_query_handler(__handle_check_registration_callback, text='check_registration')
-    dp.register_callback_query_handler(__handle_check_deposit_callback, text='check_deposit')
+    dp.register_message_handler(__handle_one_win_id_message, state=UserRegistrationStates.enter_one_win_id)
+    dp.register_callback_query_handler(__handle_check_deposit_callback, Keyboards.deposit_check_callback.filter())

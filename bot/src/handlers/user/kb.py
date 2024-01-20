@@ -4,8 +4,12 @@ from aiogram.utils.callback_data import CallbackData
 from src.create_bot import _
 
 
+one_win_registration_link = 'https://1wowei.xyz/casino/list?open=register#h1bi'
+
+
 class Keyboards:
     locale_callback_data = CallbackData('locale', 'language_code')
+    deposit_check_callback = CallbackData('check_dep', 'one_win_id')
 
     @staticmethod
     def get_choose_locale() -> InlineKeyboardMarkup:
@@ -30,14 +34,21 @@ class Keyboards:
         return InlineKeyboardMarkup(row_width=1).add(receive_button)
 
     @staticmethod
-    def get_registration(user_telegram_id: int) -> InlineKeyboardMarkup:
-        registration_link = f'https://1wauah.xyz/casino/list?open=register#ly4f&sub1={user_telegram_id}'
-        registration_link_button = InlineKeyboardButton(text=_('📲 РЕГИСТРАЦИЯ'), url=registration_link)
-
+    def get_create_account() -> InlineKeyboardMarkup:
+        registration_link_button = InlineKeyboardButton(text=_('🔑 СОЗДАТЬ АККАУНТ'), url=one_win_registration_link)
         check_registration = InlineKeyboardButton(text=_('🔎 ПРОВЕРИТЬ РЕГИСТРАЦИЮ'), callback_data='check_registration')
         return InlineKeyboardMarkup(row_width=1).add(registration_link_button, check_registration)
 
     @staticmethod
-    def get_check_deposit() -> InlineKeyboardMarkup:
-        check_deposit = InlineKeyboardButton(text=_('✅ ПРОВЕРИТЬ ДЕПОЗИТ'), callback_data='check_deposit')
+    def get_registration() -> InlineKeyboardMarkup:
+        registration_link_button = InlineKeyboardButton(text=_('📲 РЕГИСТРАЦИЯ'), url=one_win_registration_link)
+        check_registration = InlineKeyboardButton(text=_('🔎 ПРОВЕРИТЬ РЕГИСТРАЦИЮ'), callback_data='check_registration')
+        return InlineKeyboardMarkup(row_width=1).add(registration_link_button, check_registration)
+
+    @classmethod
+    def get_check_deposit(cls, one_win_id: int) -> InlineKeyboardMarkup:
+        check_deposit = InlineKeyboardButton(
+            text=_('🔐 ПРОВЕРИТЬ ДЕПОЗИТ'),
+            callback_data=cls.deposit_check_callback.new(one_win_id=one_win_id)
+        )
         return InlineKeyboardMarkup(row_width=1).add(check_deposit)

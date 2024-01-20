@@ -51,17 +51,17 @@ class OneWinRegistration(_BaseModel):
     class Meta:
         db_table = 'one_win_registrations'
 
-    sub_id = IntegerField(primary_key=True)
-    one_win_id = IntegerField()
+    one_win_id = IntegerField(primary_key=True)
+    timestamp = DateTimeField(default=datetime.now)
 
 
 class OneWinDeposit(_BaseModel):
     class Meta:
         db_table = 'one_win_deposits'
 
-    sub_id = IntegerField(primary_key=True)
     one_win_id = IntegerField()
     amount = FloatField()
+    timestamp = DateTimeField(default=datetime.now)
 
 
 def register_models() -> None:

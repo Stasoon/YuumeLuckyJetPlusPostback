@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-18 02:31+0300\n"
+"POT-Creation-Date: 2024-01-20 02:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: src/handlers/user/kb.py:22
+#: src/handlers/user/kb.py:26
 msgid "🔊 ПОДПИСАТЬСЯ НА КАНАЛ 🔊"
 msgstr ""
 
-#: src/handlers/user/kb.py:23
+#: src/handlers/user/kb.py:27
 msgid "🔒 БЕСПЛАТНЫЙ ДОСТУП 🔒"
 msgstr ""
 
-#: src/handlers/user/kb.py:29
+#: src/handlers/user/kb.py:33
 msgid "🤖 ПОЛУЧИТЬ СИГНАЛЫ 🤖"
 msgstr ""
 
-#: src/handlers/user/kb.py:35
-msgid "📲 РЕГИСТРАЦИЯ"
+#: src/handlers/user/kb.py:38
+msgid "🔑 СОЗДАТЬ АККАУНТ"
 msgstr ""
 
-#: src/handlers/user/kb.py:37
+#: src/handlers/user/kb.py:39 src/handlers/user/kb.py:45
 msgid "🔎 ПРОВЕРИТЬ РЕГИСТРАЦИЮ"
 msgstr ""
 
-#: src/handlers/user/kb.py:42
-msgid "✅ ПРОВЕРИТЬ ДЕПОЗИТ"
+#: src/handlers/user/kb.py:44
+msgid "📲 РЕГИСТРАЦИЯ"
+msgstr ""
+
+#: src/handlers/user/kb.py:51
+msgid "🔐 ПРОВЕРИТЬ ДЕПОЗИТ"
 msgstr ""
 
 #: src/handlers/user/messages.py:19
@@ -82,22 +86,35 @@ msgstr ""
 
 #: src/handlers/user/messages.py:63
 msgid ""
-"<b>РЕГИСТРАЦИЯ НЕ ПРОЙДЕНА</b> ❌ \n"
+"👀 Отправь сюда ID своего профиля для проверки. \n"
 "\n"
-"‼ <b>ОЧЕНЬ ВАЖНО</b>, если у вас уже есть аккаунт, вам нужно "
-"зарегистрировать <b>НОВУЮ учетную запись</b> по кнопке ниже, чтобы "
-"сигналы в VIP канале совпадали с вашими, <b>так как бот работает на "
-"другом сервере.</b> \n"
+"<b>Инструкция как найти свой ID на скриншоте выше ⬆</b>"
+msgstr ""
+
+#: src/handlers/user/messages.py:74
+msgid ""
+"⚠ Упс! Я не вижу этот айди в базе \n"
+"\n"
+"❗Если у вас уже есть аккаунт, вам надо  зарегистрировать <b>НОВУЮ учетную"
+" запись</b> по кнопке ниже, чтобы сигналы в VIP канале совпадали с "
+"вашими, <b>так как бот работает на другом сервере.</b> \n"
 "\n"
 "🤖 Чтобы бот смог проверить вашу регистрацию, <b>обязательно нужно ввести "
 "промокод «<code>{promo}</code>» при регистрации!</b>"
 msgstr ""
 
-#: src/handlers/user/messages.py:74
+#: src/handlers/user/messages.py:84
+msgid ""
+"<b>ID должен состоять только из чисел!</b> \n"
+"\n"
+"Попробуйте ещё раз:"
+msgstr ""
+
+#: src/handlers/user/messages.py:88
 msgid "registration_not_passed_photo"
 msgstr ""
 
-#: src/handlers/user/messages.py:78
+#: src/handlers/user/messages.py:92
 msgid ""
 "<b>РЕГИСТРАЦИЯ ПРОЙДЕНА</b> ✅ \n"
 "\n"
@@ -107,11 +124,17 @@ msgid ""
 "После активации автоматически выдается доступ к VIP каналу 🔑"
 msgstr ""
 
-#: src/handlers/user/messages.py:90
-msgid "❗ Ваш депозит не найден"
+#: src/handlers/user/messages.py:104
+msgid "❗Ваш депозит не найден"
 msgstr ""
 
-#: src/handlers/user/messages.py:95
+#: src/handlers/user/messages.py:108
+msgid ""
+"❗Ваш депозит найден, но чтобы получить доступ в VIP, необходимо "
+"пополнение на сумму от 10$!"
+msgstr ""
+
+#: src/handlers/user/messages.py:113
 msgid ""
 "<b>Добро пожаловать в VIP ✅</b> \n"
 "\n"

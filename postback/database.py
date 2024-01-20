@@ -10,8 +10,8 @@ def create_tables_if_not_exist():
         # Создаём таблицу регистраций
         create_table_query = '''
         CREATE TABLE IF NOT EXISTS one_win_registrations (
-            sub_id INTEGER PRIMARY KEY,
-            one_win_id INTEGER
+            one_win_id INTEGER PRIMARY KEY,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         );
         '''
         cursor.execute(create_table_query)
@@ -19,9 +19,9 @@ def create_tables_if_not_exist():
         # Создаём таблицу депозитов
         create_table_query = '''
         CREATE TABLE IF NOT EXISTS one_win_deposits (
-            sub_id INTEGER,
             one_win_id INTEGER,
-            amount FLOAT
+            amount FLOAT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         );
         '''
         cursor.execute(create_table_query)
