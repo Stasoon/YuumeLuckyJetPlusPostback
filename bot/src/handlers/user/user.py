@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 
-from aiogram.types import CallbackQuery, Message, InputMediaVideo, InputMediaPhoto
+from aiogram.types import CallbackQuery, Message
 from peewee import fn
 
 from src.database import users
@@ -29,6 +29,7 @@ async def __handle_start_command(message: Message, state: FSMContext) -> None:
 
 
 async def __handle_locale_callback(callback: CallbackQuery, callback_data: Keyboards.locale_callback_data):
+    await callback.answer()
     await send_typing_action(callback.message)
     await callback.message.delete()
 
@@ -45,14 +46,16 @@ async def __handle_locale_callback(callback: CallbackQuery, callback_data: Keybo
 
 
 async def __handle_free_access_callback(callback: CallbackQuery):
-    await callback.message.edit_media(
-        media=InputMediaVideo(media=Messages.get_vip_examples_video(), caption=Messages.get_vip_examples()),
+    await callback.answer()
+    await callback.message.answer_video(
+        video=Messages.get_vip_examples_video(),
+        caption=Messages.get_vip_examples(),
         reply_markup=Keyboards.get_receive_signals(),
     )
 
 
 async def __handle_receive_signals_callback(callback: CallbackQuery):
-    await callback.message.edit_reply_markup(reply_markup=None)
+    await callback.answer()
     await callback.message.answer_photo(
         photo=Messages.get_registration_tutorial_photo(),
         caption=Messages.get_registration_tutorial(),
@@ -61,7 +64,7 @@ async def __handle_receive_signals_callback(callback: CallbackQuery):
 
 
 async def __handle_check_registration_callback(callback: CallbackQuery, state: FSMContext):
-    await callback.message.edit_reply_markup(reply_markup=None)
+    await callback.answer()
     await callback.message.answer_photo(
         photo=Messages.get_ask_for_one_win_id_photo(),
         caption=Messages.get_ask_for_one_win_id(),
@@ -81,15 +84,14 @@ async def __handle_one_win_id_message(message: Message, state: FSMContext):
 
     if not one_win_registration:
         text = Messages.get_registration_not_passed()
-        photo = Messages.get_registration_not_passed_photo()
         markup = Keyboards.get_registration()
+        await message.answer(text=text, reply_markup=markup)
     else:
         text = Messages.get_registration_passed()
         photo = Messages.get_registration_passed_photo()
         markup = Keyboards.get_check_deposit(one_win_id=one_win_id)
         users.set_user_1win_id(telegram_id=message.from_user.id, onewin_id=one_win_id)
-
-    await message.answer_photo(photo=photo, caption=text, reply_markup=markup)
+        await message.answer_photo(photo=photo, caption=text, reply_markup=markup)
 
 
 async def __handle_check_deposit_callback(callback: CallbackQuery, callback_data: Keyboards.deposit_check_callback):

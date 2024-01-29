@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.callback_data import CallbackData
 
+from config import CHANNEL_URL
 from src.create_bot import _
 
 
@@ -22,15 +23,16 @@ class Keyboards:
 
     @staticmethod
     def get_welcome_menu() -> InlineKeyboardMarkup:
-        channel_url = 'https://t.me/+WZCtVDD5A_5jOGY6'
-        subscribe_button = InlineKeyboardButton(text=_('🔊 ПОДПИСАТЬСЯ НА КАНАЛ 🔊'), url=channel_url)
+        contact_url = 'https://t.me/Dakos777'
+        subscribe_button = InlineKeyboardButton(text=_('✔ ПОДПИСАТЬСЯ НА КАНАЛ ✔'), url=CHANNEL_URL)
+        contact_button = InlineKeyboardButton(text=_('❓ЗАДАТЬ ВОПРОС❓'), url=contact_url)
         free_access_button = InlineKeyboardButton(text=_('🔒 БЕСПЛАТНЫЙ ДОСТУП 🔒'), callback_data='free_access')
 
-        return InlineKeyboardMarkup(row_width=1).add(subscribe_button, free_access_button)
+        return InlineKeyboardMarkup(row_width=1).add(subscribe_button, contact_button, free_access_button)
 
     @staticmethod
     def get_receive_signals() -> InlineKeyboardMarkup:
-        receive_button = InlineKeyboardButton(text=_('🤖 ПОЛУЧИТЬ СИГНАЛЫ 🤖'), callback_data='receive_signals')
+        receive_button = InlineKeyboardButton(text=_('🤖 ПОЛУЧИТЬ БОТА 🤖'), callback_data='receive_signals')
         return InlineKeyboardMarkup(row_width=1).add(receive_button)
 
     @staticmethod

@@ -19,7 +19,7 @@ class Utils:
     async def write_users_to_xl() -> None:
         wb = Workbook()
         ws = wb.active
-        ws.append(('№', 'telegram_id', 'Имя', 'Реферальная ссылка', 'Дата регистрации', 'Язык'))
+        ws.append(('№', 'telegram_id', 'Имя', 'Реферальная ссылка', 'Дата регистрации', 'Язык', 'OneWin id'))
         for n, user_data in enumerate(get_all_users(), 1):
             ws.append((n, *user_data))
         wb.save(output_filename)

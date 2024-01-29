@@ -24,7 +24,7 @@ def get_user_ids() -> Generator:
 
 
 def get_all_users() -> tuple:
-    yield from ((user.telegram_id, user.name, user.referral_link, user.registration_timestamp, user.language_code) for user in User.select())
+    yield from ((user.telegram_id, user.name, user.referral_link, user.registration_timestamp, user.language_code, user.onewin_id) for user in User.select())
 
 
 def get_user_or_none(telegram_id: int) -> User | None:
