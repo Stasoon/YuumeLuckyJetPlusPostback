@@ -24,6 +24,10 @@ class Messages:
         ).format(user_name=quote_html(user_name), channel_url=CHANNEL_URL)
 
     @staticmethod
+    def get_welcome_sticker() -> str:
+        return 'CAACAgIAAxkBAAECMkxlvkjaOTJzcxeULoLVUUqoFCCaJgACTCgAAg95WUuuGnhFtULX4TQE'
+
+    @staticmethod
     def get_welcome_photo() -> str:
         return 'https://telegra.ph/file/7e6427992b877389a0bbf.png'
 

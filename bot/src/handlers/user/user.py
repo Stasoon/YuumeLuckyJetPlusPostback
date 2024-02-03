@@ -5,7 +5,7 @@ from aiogram.types import CallbackQuery, Message
 from peewee import fn
 
 from src.database import users
-from src.utils import send_typing_action, throttle
+from src.utils import send_typing_action
 from .messages import Messages
 from .kb import Keyboards
 from src.create_bot import i18n
@@ -14,7 +14,6 @@ from src.database.models import OneWinRegistration, OneWinDeposit
 from ...misc import UserRegistrationStates
 
 
-@throttle()
 async def __handle_start_command(message: Message, state: FSMContext) -> None:
     await state.finish()
     await send_typing_action(message)
@@ -25,6 +24,7 @@ async def __handle_start_command(message: Message, state: FSMContext) -> None:
         reflink=message.get_full_command()[1]
     )
 
+    await message.answer_sticker(sticker=Messages.get_welcome_sticker())
     await message.answer(text=Messages.ask_for_locale(), reply_markup=Keyboards.get_choose_locale())
 
 
