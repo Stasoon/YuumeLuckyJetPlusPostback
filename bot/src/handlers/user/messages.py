@@ -11,25 +11,32 @@ class Messages:
     #  Статья с фото: https://telegra.ph/Foto-dlya-yuume-tg-bota-12-12
 
     @staticmethod
+    def get_start_sticker() -> str:
+        return 'CAACAgIAAxkBAAECMkxlvkjaOTJzcxeULoLVUUqoFCCaJgACTCgAAg95WUuuGnhFtULX4TQE'
+
+    @staticmethod
     def ask_for_locale() -> str:
-        return 'Выберите язык ⤵️\n' \
-               'What is your language? ⤵'
+        return (
+            'Выберите язык ⤵️\n' 
+            'What is your language? ⤵'
+        )
 
     @staticmethod
     def get_welcome(user_name: str = 'незнакомец') -> str:
         return _(
             "Добро пожаловать, <u>{user_name}</u>! \n\n"
             "⚙ Здесь вы можете получить <b>бесплатный доступ к боту</b> который дает сигналы в игре <b>Lucky Jet</b> \n\n"
-            "🔊 Также обязательно подпишитесь на <a href='{channel_url}'>наш канал</a>, где есть много полезной информации"
+            "🔊 Также обязательно подпишитесь на <a href='{channel_url}'>наш канал</a>, где есть много полезной информации\n\n"
+            "<b>И только после этого вы сможете получать сигналы ✅</b>"
         ).format(user_name=quote_html(user_name), channel_url=CHANNEL_URL)
-
-    @staticmethod
-    def get_welcome_sticker() -> str:
-        return 'CAACAgIAAxkBAAECMkxlvkjaOTJzcxeULoLVUUqoFCCaJgACTCgAAg95WUuuGnhFtULX4TQE'
 
     @staticmethod
     def get_welcome_photo() -> str:
         return 'https://telegra.ph/file/7e6427992b877389a0bbf.png'
+
+    @staticmethod
+    def get_subscription_needed() -> str:
+        return _("Сначала подпишитесь на канал❗")
 
     @staticmethod
     def get_vip_examples() -> str:

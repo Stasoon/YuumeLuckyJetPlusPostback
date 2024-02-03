@@ -1,18 +1,37 @@
-from aiogram import Dispatcher
+from aiogram import Dispatcher, Bot
 from aiogram.dispatcher import FSMContext
-
+from aiogram.types import ChatMemberStatus
 from aiogram.types import CallbackQuery, Message
+from aiogram.utils.exceptions import BadRequest
 from peewee import fn
 
 from src.database import users
-from src.utils import send_typing_action
+from src.database.models import OneWinRegistration, OneWinDeposit
+from src.utils import send_typing_action, logger
 from .messages import Messages
 from .kb import Keyboards
+from config import CHANNEL_ID
 from src.create_bot import i18n
-
-from src.database.models import OneWinRegistration, OneWinDeposit
 from ...misc import UserRegistrationStates
 
+
+# region Utils
+
+async def is_user_subscriber(bot: Bot, user_id: int) -> bool:
+    try:
+        member = await bot.get_chat_member(chat_id=CHANNEL_ID, user_id=user_id)
+    except BadRequest as e:
+        logger.error(f"Ошибка при проверке подписки на канал: {e}")
+        return True
+
+    if member.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.CREATOR, ChatMemberStatus.MEMBER]:
+        return True
+    return False
+
+# endregion
+
+
+# region Handlers
 
 async def __handle_start_command(message: Message, state: FSMContext) -> None:
     await state.finish()
@@ -24,7 +43,7 @@ async def __handle_start_command(message: Message, state: FSMContext) -> None:
         reflink=message.get_full_command()[1]
     )
 
-    await message.answer_sticker(sticker=Messages.get_welcome_sticker())
+    await message.answer_sticker(sticker=Messages.get_start_sticker())
     await message.answer(text=Messages.ask_for_locale(), reply_markup=Keyboards.get_choose_locale())
 
 
@@ -46,6 +65,11 @@ async def __handle_locale_callback(callback: CallbackQuery, callback_data: Keybo
 
 
 async def __handle_free_access_callback(callback: CallbackQuery):
+    is_sub = await is_user_subscriber(bot=callback.bot, user_id=callback.from_user.id)
+    if not is_sub:
+        await callback.answer(text=Messages.get_subscription_needed())
+        return
+
     await callback.answer()
     await callback.message.answer_video(
         video=Messages.get_vip_examples_video(),

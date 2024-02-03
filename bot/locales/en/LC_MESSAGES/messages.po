@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-29 16:39+0300\n"
+"POT-Creation-Date: 2024-02-03 19:54+0300\n"
 "PO-Revision-Date: 2024-01-18 02:00+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,16 +19,12 @@ msgstr ""
 "Generated-By: Babel 2.9.1\n"
 
 #: src/handlers/user/kb.py:27
-msgid "✔ ПОДПИСАТЬСЯ НА КАНАЛ ✔"
-msgstr "✔ SUBSCRIBE TO THE CHANNEL ✔"
-
-#: src/handlers/user/kb.py:28
-msgid "❓ЗАДАТЬ ВОПРОС❓"
-msgstr "❓ASK A QUESTION❓"
+msgid "ПОДПИСАТЬСЯ НА КАНАЛ 🔔"
+msgstr "SUBSCRIBE TO THE CHANNEL 🔔"
 
 #: src/handlers/user/kb.py:29
-msgid "🔒 БЕСПЛАТНЫЙ ДОСТУП 🔒"
-msgstr "🔒 FREE ACCESS 🔒"
+msgid "БЕСПЛАТНЫЙ БОТ 🔒"
+msgstr "FREE BOT 🔒"
 
 #: src/handlers/user/kb.py:35
 msgid "🤖 ПОЛУЧИТЬ БОТА 🤖"
@@ -46,11 +42,15 @@ msgstr "🔎 CHECK REGISTRATION"
 msgid "📲 РЕГИСТРАЦИЯ"
 msgstr "📲 REGISTRATION"
 
-#: src/handlers/user/kb.py:53
+#: src/handlers/user/kb.py:52
+msgid "💰 ПОПОЛНИТЬ БАЛАНС"
+msgstr "💰 TOP UP YOUR BALANCE"
+
+#: src/handlers/user/kb.py:54
 msgid "🔐 ПРОВЕРИТЬ ДЕПОЗИТ"
 msgstr "🔐 CHECK DEPOSIT"
 
-#: src/handlers/user/messages.py:20
+#: src/handlers/user/messages.py:26
 msgid ""
 "Добро пожаловать, <u>{user_name}</u>! \n"
 "\n"
@@ -58,15 +58,23 @@ msgid ""
 "сигналы в игре <b>Lucky Jet</b> \n"
 "\n"
 "🔊 Также обязательно подпишитесь на <a href='{channel_url}'>наш канал</a>,"
-" где есть много полезной информации"
+" где есть много полезной информации\n"
+"\n"
+"<b>И только после этого вы сможете получать сигналы ✅</b>"
 msgstr ""
 "Welcome, <u>{user_name}</u>! \n"
 "\n"
-"⚙ Here you can get <b>free access to the bot</b> that provides signals in the game <b>Lucky Jet</b> \n"
+"⚙ Here you can get <b>free access to a bot</b> that provides signals in the game <b>Lucky Jet</b> \n"
 "\n"
-"🔊 Also, be sure to subscribe to <a href='{channel_url}'>our channel</a>, where there is a lot of useful information."
+"🔊 Also, make sure to subscribe to <a href='{channel_url}'>our channel</a>, where there is a lot of useful information\n"
+"\n"
+"<b>And only after that, you will be able to receive signals ✅</b>"
 
-#: src/handlers/user/messages.py:32
+#: src/handlers/user/messages.py:39
+msgid "Сначала подпишитесь на канал❗"
+msgstr "Subscribe to the channel first❗"
+
+#: src/handlers/user/messages.py:43
 msgid ""
 "<b>Фрагмент работы БОТА ☝</b> \n"
 "\n"
@@ -82,7 +90,7 @@ msgstr ""
 "✔ Convenient and stable signals \n"
 "✔ 24/7 support and assistance with the bot \n"
 
-#: src/handlers/user/messages.py:46
+#: src/handlers/user/messages.py:57
 msgid ""
 "⤵ <b>Регистрация аккаунта </b> \n"
 "\n"
@@ -94,11 +102,14 @@ msgid ""
 msgstr ""
 "⤵ <b>Account Registration </b> \n"
 "\n"
-"❗ You need to create a <b>NEW account</b> using the button below, <b>entering the promo code «<code>{promo}</code>» so that the BOT can identify you.</b> \n"
+"❗ You need to create a <b>NEW account</b> using the button below, "
+"<b>entering the promo code «<code>{promo}</code>» so that the BOT can "
+"identify you.</b> \n"
 "\n"
-"📲 If you don't have an extra phone number for account creation, <b>you can use social networks.</b>"
+"📲 If you don't have an extra phone number for account creation, <b>you "
+"can use social networks.</b>"
 
-#: src/handlers/user/messages.py:59
+#: src/handlers/user/messages.py:70
 msgid ""
 "<b>Инструкция как найти свой ID на скриншоте выше ⬆</b> \n"
 "\n"
@@ -108,7 +119,7 @@ msgstr ""
 "\n"
 "🔑 Send your profile ID here for verification:"
 
-#: src/handlers/user/messages.py:70
+#: src/handlers/user/messages.py:81
 msgid ""
 "⚠ Упс! Я не вижу этот ID в базе \n"
 "\n"
@@ -122,13 +133,15 @@ msgid ""
 msgstr ""
 "⚠ Oops! I don't see this ID in the database \n"
 "\n"
-"❗ Perhaps you registered not through the link. Or you entered the ID from an old account. \n"
+"❗ Perhaps you registered not through the link. Or you entered the ID from"
+" an old account. \n"
 "\n"
-"🤖 <b>Make sure to enter the promo code «<code>{promo}</code>» during registration!</b> \n"
+"🤖 <b>Make sure to enter the promo code «<code>{promo}</code>» during "
+"registration!</b> \n"
 "\n"
 "This is necessary so that the bot can <b>identify you</b> ✅"
 
-#: src/handlers/user/messages.py:79
+#: src/handlers/user/messages.py:90
 msgid ""
 "<b>ID должен состоять только из чисел!</b> \n"
 "\n"
@@ -138,19 +151,7 @@ msgstr ""
 "\n"
 "Please try again:"
 
-#: src/handlers/user/messages.py:96
-msgid "❗Ваш депозит не найден"
-msgstr "❗Your deposit was not found"
-
-#: src/handlers/user/messages.py:100
-msgid ""
-"❗Ваш депозит найден, но чтобы получить доступ в VIP, необходимо "
-"пополнение на сумму от 10$!"
-msgstr ""
-"❗Your deposit has been found, but to access VIP, you need to top up your "
-"account with a minimum of $10!"
-
-#: src/handlers/user/messages.py:83
+#: src/handlers/user/messages.py:94
 msgid ""
 "<b>РЕГИСТРАЦИЯ ПРОЙДЕНА</b> ✅ \n"
 "\n"
@@ -161,11 +162,25 @@ msgid ""
 msgstr ""
 "<b>REGISTRATION COMPLETE</b> ✅ \n"
 "\n"
-"Now you need to activate your account, <b>so that the bot can start providing signals.</b> Activation is done by «<b>topping up the balance</b>» starting from $10. \n"
+"Now you need to activate your account, <b>so that the bot can start "
+"providing signals.</b> Activation is done by «<b>topping up the "
+"balance</b>» starting from $10. \n"
 "\n"
 "<b>After activation, automatic access to the BOT 🤖 is granted.</b>"
 
-#: src/handlers/user/messages.py:105
+#: src/handlers/user/messages.py:107
+msgid "❗Ваш депозит не найден"
+msgstr "❗Your deposit was not found"
+
+#: src/handlers/user/messages.py:111
+msgid ""
+"❗Ваш депозит найден, но чтобы получить доступ в VIP, необходимо "
+"пополнение на сумму от 10$!"
+msgstr ""
+"❗Your deposit has been found, but to access VIP, you need to top up your "
+"account with a minimum of $10!"
+
+#: src/handlers/user/messages.py:116
 msgid ""
 "Бесплатная версия БОТА находится на технических работах из-за обновления,"
 " <b>после окончания работ ты получишь доступ к боту</b> 🤖 \n"
@@ -181,11 +196,20 @@ msgid ""
 "нашего бота могут не совпадать, дабы избежать таких проблем, "
 "<b>рекомендую не менять игровой аккаунт.</b>"
 msgstr ""
-"The free version of the BOT is undergoing technical maintenance due to an update, <b>once the maintenance is complete, you will have access to the bot</b> 🤖 \n"
+"The free version of the BOT is undergoing technical maintenance due to an"
+" update, <b>once the maintenance is complete, you will have access to the"
+" bot</b> 🤖 \n"
 "\n"
-"To avoid inconvenience during the ongoing maintenance, you can use our <b>private channel</b> where signals from the PAID bot are provided 📈 \n"
+"To avoid inconvenience during the ongoing maintenance, you can use our "
+"<b>private channel</b> where signals from the PAID bot are provided 📈 \n"
 "\n"
 "<b>Private channel link:</b> \n"
 "🔑 {vip_url} \n"
 "\n"
-"❗<b>IMPORTANT</b>: Do not play on the old account, as signals from our bot may not match. To avoid such issues, <b>it is recommended not to change your gaming account.</b>"
+"❗<b>IMPORTANT</b>: Do not play on the old account, as signals from our "
+"bot may not match. To avoid such issues, <b>it is recommended not to "
+"change your gaming account.</b>"
+
+#~ msgid "ЗАДАТЬ ВОПРОС 💬"
+#~ msgstr "ASK A QUESTION 💬"
+

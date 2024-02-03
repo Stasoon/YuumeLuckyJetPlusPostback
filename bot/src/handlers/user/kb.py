@@ -24,11 +24,11 @@ class Keyboards:
     @staticmethod
     def get_welcome_menu() -> InlineKeyboardMarkup:
         contact_url = 'https://t.me/Dakos777'
-        subscribe_button = InlineKeyboardButton(text=_('✔ ПОДПИСАТЬСЯ НА КАНАЛ ✔'), url=CHANNEL_URL)
-        contact_button = InlineKeyboardButton(text=_('❓ЗАДАТЬ ВОПРОС❓'), url=contact_url)
-        free_access_button = InlineKeyboardButton(text=_('🔒 БЕСПЛАТНЫЙ ДОСТУП 🔒'), callback_data='free_access')
+        subscribe_button = InlineKeyboardButton(text=_('ПОДПИСАТЬСЯ НА КАНАЛ 🔔'), url=CHANNEL_URL)
+        # contact_button = InlineKeyboardButton(text=_('ЗАДАТЬ ВОПРОС 💬'), url=contact_url)
+        free_access_button = InlineKeyboardButton(text=_('БЕСПЛАТНЫЙ БОТ 🔒'), callback_data='free_access')
 
-        return InlineKeyboardMarkup(row_width=1).add(subscribe_button, contact_button, free_access_button)
+        return InlineKeyboardMarkup(row_width=1).add(subscribe_button, free_access_button)
 
     @staticmethod
     def get_receive_signals() -> InlineKeyboardMarkup:
@@ -49,8 +49,8 @@ class Keyboards:
 
     @classmethod
     def get_check_deposit(cls, one_win_id: int) -> InlineKeyboardMarkup:
+        dep = InlineKeyboardButton(text=_('💰 ПОПОЛНИТЬ БАЛАНС'), url='https://1wowei.xyz')
         check_deposit = InlineKeyboardButton(
-            text=_('🔐 ПРОВЕРИТЬ ДЕПОЗИТ'),
-            callback_data=cls.deposit_check_callback.new(one_win_id=one_win_id)
+            text=_('🔐 ПРОВЕРИТЬ ДЕПОЗИТ'), callback_data=cls.deposit_check_callback.new(one_win_id=one_win_id)
         )
-        return InlineKeyboardMarkup(row_width=1).add(check_deposit)
+        return InlineKeyboardMarkup(row_width=1).add(dep, check_deposit)
